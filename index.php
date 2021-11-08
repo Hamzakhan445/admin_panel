@@ -1,8 +1,25 @@
+  <?php 
+ session_start();
+ $role_id="0";
+ if (isset($_SESSION['email']) && isset($_SESSION['pass']) ) {
+   // code...
+    $role_id=$_SESSION['role_id'];
+  
+ }
+ else
+ {
+   session_destroy();
+   header('location:login.php');
+ }
+
+
+?>
+   
 <!doctype html>
 <html class="no-js" lang="en">
 
 <head>
-    <meta charset="utf-8">
+   <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Sufee Admin - HTML5 Admin Template</title>
     <meta name="description" content="Sufee Admin - HTML5 Admin Template">
@@ -84,8 +101,8 @@
                       <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i> Vehicle Pricing </a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-table"></i><a href="add_pricing.php"> Add pricing  </a></li>
-                            <li><i class="fa fa-table"></i><a href="show_pricing.php"> Show pricing  </a></li>
+                            <li><i class="fa fa-table"></i><a href="add_vpricing.php"> Add pricing  </a></li>
+                            <li><i class="fa fa-table"></i><a href="show_vpricing.php"> Show pricing  </a></li>
                         </ul>
                     </li>
 
@@ -192,13 +209,38 @@
                         </a>
 
                         <div class="user-menu dropdown-menu">
-                            <a class="nav-link" href="#"><i class="fa fa-user"></i> My Profile</a>
+                            <?php
+                            if ($role_id=="1") {
+                                // code...
+                            
+
+                            ?>
+                            <a class="nav-link" href="profile.php"><i class="fa fa-user"></i> My Profile</a>
+
+                            <?php
+
+
+                            } 
+                            else if ($role_id=="2") {
+                                // code...
+                 
+
+                            ?>
+
+                             <a class="nav-link" href="#"><i class="fa fa-user"></i> My Profile</a>
+
+                             <?php
+
+                            } 
+           
+                            ?>
+
 
                             <a class="nav-link" href="#"><i class="fa fa-user"></i> Notifications <span class="count">13</span></a>
 
                             <a class="nav-link" href="#"><i class="fa fa-cog"></i> Settings</a>
 
-                            <a class="nav-link" href="#"><i class="fa fa-power-off"></i> Logout</a>
+                            <a class="nav-link" href="logout.php"><i class="fa fa-power-off"></i> Logout</a>
                         </div>
                     </div>
 

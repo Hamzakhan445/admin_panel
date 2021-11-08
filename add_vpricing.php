@@ -55,7 +55,7 @@
                 <a class="navbar-brand hidden" href="./"><img src="images/logo2.png" alt="Logo"></a>
             </div>
 
-            <div id="main-menu" class="main-menu collapse navbar-collapse">
+              <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li class="active">
                         <a href="index.html"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
@@ -269,7 +269,7 @@
 
          <div class="form-merchant bg-white  p-5 shadow  w-75 mx-auto mt-3 ">
              
-             <form action="vehicle_query.php" method="post" enctype="multipart/form-data" >
+             <form action="vpricing_query.php" method="post" enctype="multipart/form-data" >
                  
                  <div class="row">
 
@@ -279,20 +279,14 @@
              </div>
 
                 <div class="col-lg-5">
-            <label for="input"> vehicle_type </label>
-            <input type="text" required class="form-control " name="vehicle_type" >
+            <label for="input"> vehicle_name</label>
+            <input type="text" required class="form-control " name="vehicle_name" >
              </div>
      
-                <div class="col-lg-10">
-            <label for="input"> Price Per / hr    </label>
-            <input type="text" required class="form-control " name="price_hr" >
-             </div>
- 
-
-          
+        
                  </div>
                
-             <input type="submit" class="btn btn-outline-dark mt-3" value="Add vehicle" name="add_vehicle" >
+             <input type="submit" class="btn btn-outline-dark mt-3" value="Add vehicle" name="add_vpricing" >
 
              </form>
 

@@ -55,7 +55,7 @@
                 <a class="navbar-brand hidden" href="./"><img src="images/logo2.png" alt="Logo"></a>
             </div>
 
-            <div id="main-menu" class="main-menu collapse navbar-collapse">
+           <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li class="active">
                         <a href="index.html"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
@@ -207,13 +207,13 @@
                         </a>
 
                         <div class="user-menu dropdown-menu">
-                            <a class="nav-link" href="profile.php"><i class="fa fa-user"></i> My Profile</a>
+                            <a class="nav-link" href="index.php"><i class="fa fa-user"></i> My Profile</a>
 
                             <a class="nav-link" href="#"><i class="fa fa-user"></i> Notifications <span class="count">13</span></a>
 
                             <a class="nav-link" href="#"><i class="fa fa-cog"></i> Settings</a>
 
-                            <a class="nav-link" href="#"><i class="fa fa-power-off"></i> Logout</a>
+                           <a class="nav-link" href="logout.php"><i class="fa fa-power-off"></i> Logout</a>
                         </div>
                     </div>
 
@@ -265,39 +265,68 @@
 <!--         -----------------------------------------------------------------------
                         ADD MERCHANT SECTION
         ----------------------------------------------------------------------- -->
-                        
+                     
+   <div class="table bg-white mx-auto " style="width:98%;">
 
-         <div class="form-merchant bg-white  p-5 shadow  w-75 mx-auto mt-3 ">
-             
-             <form action="vehicle_query.php" method="post" enctype="multipart/form-data" >
-                 
-                 <div class="row">
+   
 
-            <div class="col-lg-5">
-            <label for="input"> Merchant Id   </label>
-            <input type="text" required class="form-control " name="merchant_id" >
-             </div>
+    <form method="post" class="d-flex w-50 align-items-center" action="vehicle_search.php">
+    <input type="search" required class="form-control mt-3" name="text" placeholder="Search here ..." >
+    <input type="submit"   value="Search" name="search" class="btn btn-outline-dark mt-3 ">
+    </form>
 
-                <div class="col-lg-5">
-            <label for="input"> vehicle_type </label>
-            <input type="text" required class="form-control " name="vehicle_type" >
-             </div>
-     
-                <div class="col-lg-10">
-            <label for="input"> Price Per / hr    </label>
-            <input type="text" required class="form-control " name="price_hr" >
-             </div>
+
+
+
+
+ <table class="table mt-4" >
+  <thead>
+    <tr>
+    <th>Id</th>
+    <th>Merchant_id</th>
+      <th>vehicle_name</th>
+  
+    <th>Operation</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <?php 
+
+        include 'connection.php';
+
+        $mselect = "select * from vehicle_type";
+
+        $msr_query = mysqli_query($con, $mselect);
+
+        while ($show = mysqli_fetch_array($msr_query)) {
+            
+ 
+    ?>
+
+    <tr>
+      <th scope="row"> <?php echo $show['id']; ?>  </th>
+      <th scope="row"> <?php echo $show['merchant_id']; ?>  </th>
+      <td><?php echo $show['vehicle_name']; ?></td>
  
 
-          
-                 </div>
-               
-             <input type="submit" class="btn btn-outline-dark mt-3" value="Add vehicle" name="add_vehicle" >
+      <td> 
 
-             </form>
+            <a href="vpricing_update.php?idd=<?php echo $show['id']; ?>" class="badge-success p-1" data-toggle="tooltip" title="Hooray!"> Edit    </a>
+        <a href="vpricing_query.php?delete=<?php echo $show['id']; ?>" class="badge-danger p-1" data-toggle="tooltip" title="Hooray!"> Delete    </a>
 
-         </div>
- 
+       </td>
+    
+    </tr>
+
+<?php } ?>
+    
+  </tbody>
+</table>
+    </div>
+
+
+
 
 
     </div><!-- /#right-panel -->
@@ -316,6 +345,17 @@
     <script src="vendors/jqvmap/dist/jquery.vmap.min.js"></script>
     <script src="vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
     <script src="vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+
+
+
+
+<script>
+$(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip();
+});
+</script>
+
+
     <script>
         (function($) {
             "use strict";

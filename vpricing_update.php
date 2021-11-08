@@ -55,7 +55,7 @@
                 <a class="navbar-brand hidden" href="./"><img src="images/logo2.png" alt="Logo"></a>
             </div>
 
-            <div id="main-menu" class="main-menu collapse navbar-collapse">
+               <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li class="active">
                         <a href="index.html"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
@@ -213,7 +213,7 @@
 
                             <a class="nav-link" href="#"><i class="fa fa-cog"></i> Settings</a>
 
-                            <a class="nav-link" href="#"><i class="fa fa-power-off"></i> Logout</a>
+                           <a class="nav-link" href="logout.php"><i class="fa fa-power-off"></i> Logout</a>
                         </div>
                     </div>
 
@@ -267,38 +267,82 @@
         ----------------------------------------------------------------------- -->
                         
 
+       	<?php 
+
+       		include 'connection.php';
+
+       		$id = $_GET['idd'];
+
+       		$selectdata = "select * from vehicle_type where id = $id ";
+
+       		$runquery = mysqli_query($con, $selectdata);
+
+       		while ($showdata = mysqli_fetch_array($runquery)) {
+       			 
+       	 	
+       	 	if (isset($_POST['update_vpricing'])) {
+
+       	 	$idd = $_GET['idd'];
+
+
+     $merchant_id = $_POST['merchant_id'];
+    $vehicle_name = $_POST['vehicle_name'];
+   
+
+       
+     
+
+     	$updatequery = "update vehicle_type set id = $idd, merchant_id = '$merchant_id', vehicle_name='$vehicle_name' where id= $idd ";
+ 				
+ 		$rquery = mysqli_query($con, $updatequery);		
+
+
+      if ($rquery) {
+ 
+      	echo "<script> alert('Data Updated'); window.location.href = 'show_vpricing.php';  </script> ";
+      }
+      else
+      {
+      	echo "<script> alert('Data not Updated'); </script> ";
+
+      }
+
+
+
+       	 	}
+
+
+       	 ?>
+   	
+
          <div class="form-merchant bg-white  p-5 shadow  w-75 mx-auto mt-3 ">
              
-             <form action="vehicle_query.php" method="post" enctype="multipart/form-data" >
+         <form action="" method="post" enctype="multipart/form-data" >
                  
                  <div class="row">
 
-            <div class="col-lg-5">
+    <div class="col-lg-5">
             <label for="input"> Merchant Id   </label>
-            <input type="text" required class="form-control " name="merchant_id" >
+            <input type="text" value="<?php echo $showdata['merchant_id']; ?>" required class="form-control " name="merchant_id" >
              </div>
 
                 <div class="col-lg-5">
-            <label for="input"> vehicle_type </label>
-            <input type="text" required class="form-control " name="vehicle_type" >
+            <label for="input"> vehicle_name </label>
+            <input type="text" value="<?php echo $showdata['vehicle_name']; ?>" required class="form-control " name="vehicle_name" >
              </div>
-     
-                <div class="col-lg-10">
-            <label for="input"> Price Per / hr    </label>
-            <input type="text" required class="form-control " name="price_hr" >
-             </div>
- 
 
           
                  </div>
                
-             <input type="submit" class="btn btn-outline-dark mt-3" value="Add vehicle" name="add_vehicle" >
+             <input type="submit" class="btn btn-outline-dark mt-3" value="update vehicle" name="update_vpricing" >
 
              </form>
 
+                <?php  } ?>
+
+
          </div>
  
-
 
     </div><!-- /#right-panel -->
 

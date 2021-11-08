@@ -1,3 +1,17 @@
+  <?php 
+ session_start();
+ if (isset($_SESSION['email']) && isset($_SESSION['pass']) ) {
+   // code...
+  
+ }
+ else
+ {
+   session_destroy();
+   header('location:login.php');
+ }
+
+
+?>
 <!doctype html>
 <html class="no-js" lang="en">
 
@@ -160,7 +174,7 @@
                         </a>
 
                         <div class="user-menu dropdown-menu">
-                            <a class="nav-link" href="#"><i class="fa fa-user"></i> My Profile</a>
+                            <a class="nav-link" href="profile.php"><i class="fa fa-user"></i> My Profile</a>
 
                             <a class="nav-link" href="#"><i class="fa fa-user"></i> Notifications <span class="count">13</span></a>
 

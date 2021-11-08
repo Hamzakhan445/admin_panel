@@ -1,7 +1,13 @@
   <?php 
  session_start();
+ $role_id = "0"; 
+ $email = ""; 
+ $pass = ""; 
  if (isset($_SESSION['email']) && isset($_SESSION['pass']) ) {
    // code...
+    $role_id = $_SESSION['role_id'];
+    $email = $_SESSION['email'];
+    $pass = $_SESSION['pass'];
   
  }
  else
@@ -12,11 +18,12 @@
 
 
 ?>
+   
 <!doctype html>
 <html class="no-js" lang="en">
 
 <head>
-    <meta charset="utf-8">
+   <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Sufee Admin - HTML5 Admin Template</title>
     <meta name="description" content="Sufee Admin - HTML5 Admin Template">
@@ -55,7 +62,7 @@
                 <a class="navbar-brand hidden" href="./"><img src="images/logo2.png" alt="Logo"></a>
             </div>
 
-            <div id="main-menu" class="main-menu collapse navbar-collapse">
+             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li class="active">
                         <a href="index.html"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
@@ -115,7 +122,6 @@
 
     <div id="right-panel" class="right-panel">
 
-        
         <!-- Header-->
         <header id="header" class="header">
 
@@ -213,7 +219,7 @@
 
                             <a class="nav-link" href="#"><i class="fa fa-cog"></i> Settings</a>
 
-                            <a class="nav-link" href="#"><i class="fa fa-power-off"></i> Logout</a>
+                            <a class="nav-link" href="logout.php"><i class="fa fa-power-off"></i> Logout</a>
                         </div>
                     </div>
 
@@ -262,42 +268,122 @@
             </div>
         </div>
 
-<!--         -----------------------------------------------------------------------
-                        ADD MERCHANT SECTION
-        ----------------------------------------------------------------------- -->
-                        
+       
 
-         <div class="form-merchant bg-white  p-5 shadow  w-75 mx-auto mt-3 ">
-             
-             <form action="vehicle_query.php" method="post" enctype="multipart/form-data" >
-                 
-                 <div class="row">
 
-            <div class="col-lg-5">
-            <label for="input"> Merchant Id   </label>
-            <input type="text" required class="form-control " name="merchant_id" >
-             </div>
-
-                <div class="col-lg-5">
-            <label for="input"> vehicle_type </label>
-            <input type="text" required class="form-control " name="vehicle_type" >
-             </div>
+ <div class="container-fluid pt-5 update_profile bg-white">
      
-                <div class="col-lg-10">
-            <label for="input"> Price Per / hr    </label>
-            <input type="text" required class="form-control " name="price_hr" >
-             </div>
+     <div class="user-img mx-auto p-3 shadow" style="width:20%;border-radius: 10px;">
+         <img src="" alt="userimg">
+     </div>
+
+
  
 
-          
-                 </div>
-               
-             <input type="submit" class="btn btn-outline-dark mt-3" value="Add vehicle" name="add_vehicle" >
 
-             </form>
+     <form action="" method="post">
+        <div class="row pb-5 ">
+  <?php 
 
-         </div>
- 
+   include 'connection.php';
+
+   $select_profile = "";
+   $key="";
+
+   if ($role_id=="1") {
+       // code...
+    $select_profile="select *from table_admin where email='$email' AND password='$pass'";
+    
+   }
+
+
+   // $select_profile = "select * from operator_table ";
+
+   $pquery = mysqli_query($con, $select_profile);
+
+   $profile = mysqli_fetch_array($pquery);
+
+   $key=$profile['id'];
+
+   if (isset($_POST['update_profile'])) {
+       // code...
+        $name=$_POST['name'];
+        $email1=$_POST['email'];
+        $username=$_POST['username'];
+        $password="";
+        if (isset($_POST['password'])) {
+            // code...
+             $password=$_POST['password'];
+        }
+       
+        $update_pro="update table_admin set name='$name',email='$email1',username='$username' where id='$key'";
+        if ($password!="") {
+            // code...
+            $update_pro="update table_admin set name='$name',email='$email1',username='$username', password=$password where id='$key'";
+
+        }
+
+        $updat_qry=mysqli_query($con,$update_pro);
+        if ($updat_qry) {
+            // code...
+            echo "<script>";
+            echo "alert('Profile Updated!')";
+            echo "window.location.href='logout.php'";
+            echo "</script>";
+        }
+        else
+        {
+             echo "<script>";
+            echo "alert('Profile Not Updated!')";
+            echo "</script>";
+        }
+
+
+   }
+
+
+    ?>
+            <div class="col-lg-8 mt-3 mx-auto ">
+                <label for="input"> Name </label>
+            <input type="text" class="form-control" name="name" value="<?php echo $profile['name']; ?>">
+            </div>
+
+            <div class="col-lg-8 mt-3 mx-auto ">
+                <label for="input"> Email </label>
+            <input type="text" class="form-control" name="email" value="<?php echo $profile['email']; ?>">
+            </div>
+
+            <div class="col-lg-8 mt-3 mx-auto ">
+                <label for="input"> Username </label>
+            <input type="text" class="form-control" name="username" value="<?php echo $profile['username']; ?>">
+            </div>
+
+            <div class="col-lg-8 mt-3 mx-auto ">
+                <label for="input"> New Password </label>
+            <input type="text" class="form-control" placeholder="New password" name="" value="">
+            </div>
+
+            <div class="col-lg-5 mt-3 mx-auto">
+            <input type="submit" class="btn btn-dark w-100 " name="update_profile" value="Update Profile"> 
+</div>
+
+        </div>
+
+     </form>
+
+ </div>
+  
+
+
+
+
+
+
+
+
+
+
+
 
 
     </div><!-- /#right-panel -->

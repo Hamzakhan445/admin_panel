@@ -10,19 +10,18 @@
  
 
 
-  if (isset($_POST['add_vehicle'])) {
+  if (isset($_POST['add_vpricing'])) {
 
     $merchant_id = $_POST['merchant_id'];
-    $vehicle_type = $_POST['vehicle_type'];
-    $price_hr = $_POST['price_hr'];
- 
-    $insert_vehicle = "insert into vehicle_pricing(merchant_id,vehicle_type,price_perhour)values('$merchant_id', '$vehicle_type','$price_hr')";
+    $vehicle_name = $_POST['vehicle_name'];
+  
+    $insert_vehicle = "insert into vehicle_type(merchant_id,vehicle_name)values('$merchant_id', '$vehicle_name')";
 
     $query = mysqli_query($con, $insert_vehicle);
 
     if ($query) {
     
-     echo "<script> alert('Data Sent'); window.location.href = 'add_vehicle.php'; </script>";
+     echo "<script> alert('Data Sent'); window.location.href = 'add_vpricing.php'; </script>";
 
     }
     else
@@ -40,7 +39,7 @@
 
 $del = $_GET['delete'];
 
- $mdelete = "delete from vehicle_pricing where id = '$del' ";
+ $mdelete = "delete from vehicle_type where id = '$del' ";
 
  $mdquery = mysqli_query($con, $mdelete);
 

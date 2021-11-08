@@ -132,12 +132,12 @@ else{
                 <a class="navbar-brand hidden" href="./"><img src="images/logo2.png" alt="Logo"></a>
             </div>
 
-            <div id="main-menu" class="main-menu collapse navbar-collapse">
+              <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li class="active">
-                        <a href="index.php"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
+                        <a href="index.html"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
                     </li>
-                     
+                      
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Manage Merchant </a>
                         <ul class="sub-menu children dropdown-menu">
@@ -145,7 +145,40 @@ else{
                             <li><i class="fa fa-table"></i><a href="show_merchant.php"> Show Merchant  </a></li>
                         </ul>
                     </li>
-                  
+                    
+
+                      <li class="menu-item-has-children dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Manage operator </a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <li><i class="fa fa-table"></i><a href="add_operator.php"> Add operator  </a></li>
+                            <li><i class="fa fa-table"></i><a href="show_operator.php"> Show operator  </a></li>
+                        </ul>
+                    </li>
+                    
+                      <li class="menu-item-has-children dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Manage Driver </a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <li><i class="fa fa-table"></i><a href="add_driver.php"> Add driver  </a></li>
+                            <li><i class="fa fa-table"></i><a href="show_driver.php"> Show driver  </a></li>
+                        </ul>
+                    </li>
+
+                        <li class="menu-item-has-children dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i> Vehicle Type </a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <li><i class="fa fa-table"></i><a href="add_vehicle.php"> Add Vehicle  </a></li>
+                            <li><i class="fa fa-table"></i><a href="show_vehicle.php"> Show Vehicle  </a></li>
+                        </ul>
+                    </li>
+
+
+                      <li class="menu-item-has-children dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i> Vehicle Pricing </a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <li><i class="fa fa-table"></i><a href="add_vpricing.php"> Add pricing  </a></li>
+                            <li><i class="fa fa-table"></i><a href="show_vpricing.php"> Show pricing  </a></li>
+                        </ul>
+                    </li>
 
                     
                 </ul>
@@ -251,13 +284,13 @@ else{
                         </a>
 
                         <div class="user-menu dropdown-menu">
-                            <a class="nav-link" href="#"><i class="fa fa-user"></i> My Profile</a>
+                            <a class="nav-link" href="profile.php"><i class="fa fa-user"></i> My Profile</a>
 
                             <a class="nav-link" href="#"><i class="fa fa-user"></i> Notifications <span class="count">13</span></a>
 
                             <a class="nav-link" href="#"><i class="fa fa-cog"></i> Settings</a>
 
-                            <a class="nav-link" href="#"><i class="fa fa-power-off"></i> Logout</a>
+                          <a class="nav-link" href="logout.php"><i class="fa fa-power-off"></i> Logout</a>
                         </div>
                     </div>
 
