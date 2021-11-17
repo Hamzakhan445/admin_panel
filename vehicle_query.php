@@ -16,7 +16,7 @@
     $vehicle_type = $_POST['vehicle_type'];
     $price_hr = $_POST['price_hr'];
  
-    $insert_vehicle = "insert into vehicle_pricing(merchant_id,vehicle_type,price_perhour)values('$merchant_id', '$vehicle_type','$price_hr')";
+   $insert_vehicle = "INSERT INTO `vehicle_pricing`(`merchant_id`, `vehicle_type`, `price_perhour`) VALUES ('$merchant_id','$vehicle_type','$price_hr')";
 
     $query = mysqli_query($con, $insert_vehicle);
 
@@ -38,7 +38,7 @@
 
  //DELETE OPERATOR SECTION
 
-$del = $_GET['delete'];
+/*$del = $_GET['delete'];
 
  $mdelete = "delete from vehicle_pricing where id = '$del' ";
 
@@ -50,7 +50,7 @@ $del = $_GET['delete'];
 else{
       echo "<script> alert('Vehicle Not deleted');   </script> ";
 }
-
+*/
 
 
 

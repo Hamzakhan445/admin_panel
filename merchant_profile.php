@@ -1,7 +1,13 @@
   <?php 
  session_start();
+ $role_id = "0"; 
+ $email = ""; 
+ $pass = ""; 
  if (isset($_SESSION['email']) && isset($_SESSION['pass']) ) {
    // code...
+    $role_id = $_SESSION['role_id'];
+    $email = $_SESSION['email'];
+    $pass = $_SESSION['pass'];
   
  }
  else
@@ -12,11 +18,12 @@
 
 
 ?>
+   
 <!doctype html>
 <html class="no-js" lang="en">
 
 <head>
-    <meta charset="utf-8">
+   <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Sufee Admin - HTML5 Admin Template</title>
     <meta name="description" content="Sufee Admin - HTML5 Admin Template">
@@ -55,7 +62,7 @@
                 <a class="navbar-brand hidden" href="./"><img src="images/logo2.png" alt="Logo"></a>
             </div>
 
-               <div id="main-menu" class="main-menu collapse navbar-collapse">
+             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li class="active">
                         <a href="index.html"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
@@ -95,7 +102,7 @@
                     </li>
 
 
-                     
+                       
 
                     
                 </ul>
@@ -109,7 +116,6 @@
 
     <div id="right-panel" class="right-panel">
 
-        
         <!-- Header-->
         <header id="header" class="header">
 
@@ -207,7 +213,7 @@
 
                             <a class="nav-link" href="#"><i class="fa fa-cog"></i> Settings</a>
 
-                           <a class="nav-link" href="logout.php"><i class="fa fa-power-off"></i> Logout</a>
+                            <a class="nav-link" href="logout.php"><i class="fa fa-power-off"></i> Logout</a>
                         </div>
                     </div>
 
@@ -256,70 +262,120 @@
             </div>
         </div>
 
-<!--         -----------------------------------------------------------------------
-                        ADD MERCHANT SECTION
-        ----------------------------------------------------------------------- -->
-                     
-   <div class="table bg-white mx-auto " style="width:98%;">
-
-   
-
-    <form method="post" class="d-flex w-50 align-items-center" action="driver_search.php">
-    <input type="search" required class="form-control mt-3" name="text" placeholder="Search here ..." >
-    <input type="submit" required value="Search" name="search" class="btn btn-outline-dark mt-3 ">
-    </form>
+       
 
 
 
+ <div class="container-fluid pt-5 update_profile bg-white">
+     
+ <?php 
 
-
- <table class="table mt-4" >
-  <thead>
-    <tr>
-    <th>Id</th>
-    <th>Operator_id</th>
-     <th>Car_number</th>
-     <th>vehicle_type</th>
+           include 'connection.php';
  
-    <th>Operation</th>
-    </tr>
-  </thead>
-  <tbody>
+  $select_data = "select * from merchant_table";
 
-    <?php 
+   $rquery = mysqli_query($con, $select_data);
 
-        include 'connection.php';
+    $profile = mysqli_fetch_array($rquery);
 
-        $mselect = "select * from driver_table";
+    $key = $profile['id'];
 
-        $msr_query = mysqli_query($con, $mselect);
 
-        while ($show = mysqli_fetch_array($msr_query)) {
-            
- 
+    if (isset($_POST['update_merchant'])) {
+
+        $merchant_name = $_POST['merchant_name'];
+        $merchant_email = $_POST['merchant_email'];
+        $merchant_address = $_POST['merchant_address'];
+        $merchant_city = $_POST['merchant_city'];
+        $merchant_company = $_POST['merchant_company'];
+        $merchant_password = $_POST['merchant_password'];
+          
+         $update_data = "update merchant_table set merchant_name = '$merchant_name', merchant_email = '$merchant_email', merchant_address = '$merchant_address', merchant_city = '$merchant_city', merchant_company = '$merchant_company', merchant_password = '$merchant_password' where id = '$key' ";
+
+         $up_query = mysqli_query($con, $update_data);
+
+         if ($up_query) {
+
+            $pass = null;
+
+            if ($pass != "") {
+
+                $update_password = "update merchant_table set merchant_password = '$merchant_password' ";
+                $pass_query = mysqli_query($con, $update_password)  ;
+             }
+
+             echo "<script> alert('Data Updated');  </script>";
+         }
+         else{
+                         echo "<script> alert('Data Not Updated');  </script>";
+         }
+
+    }
     ?>
 
-    <tr>
-      <th scope="row"> <?php echo $show['id'] ?>  </th>
-      <th scope="row"> <?php echo $show['operator_id'] ?>  </th>
-      <td> <?php echo $show['car_number'] ?></td>
-      <td><?php echo $show['vehicle_type'] ?></td>
+     <form action="" method="post" enctype="multipart/form-data">
+
+    <div class=" w-25 mx-auto text-center ">
+    <img src="<?php echo $profile['merchant_profile'] ?>" class="shadow" style="cursor: pointer;" alt="">
+</div>
+        <div class="row pb-5 ">
+ 
+
+
+            <div class="col-lg-8 mt-3 mx-auto ">
+                <label for="input"> merchant_name </label>
+            <input type="text" class="form-control" name="merchant_name" value="<?php echo $profile['merchant_name']; ?>">
+            </div>
+
+            <div class="col-lg-8 mt-3 mx-auto ">
+                <label for="input"> merchant_email </label>
+            <input type="text" class="form-control" name="merchant_email" value="<?php echo $profile['merchant_email']; ?>">
+            </div>
+
+            <div class="col-lg-8 mt-3 mx-auto ">
+                <label for="input"> merchant_address </label>
+            <input type="text" class="form-control" name="merchant_address" value="<?php echo $profile['merchant_address']; ?>">
+            </div>
+
+            <div class="col-lg-8 mt-3 mx-auto ">
+                <label for="input"> merchant_city </label>
+            <input type="text" class="form-control" name="merchant_city" value="<?php echo $profile['merchant_city']; ?>">
+            </div>
+
+            <div class="col-lg-8 mt-3 mx-auto ">
+                <label for="input"> merchant_company </label>
+            <input type="text" class="form-control" name="merchant_company" value="<?php echo $profile['merchant_company']; ?>">
+            </div>
+
+             
+            <div class="col-lg-8 mt-3 mx-auto ">
+                <label for="input"> merchant_profile </label>
+            <input type="file" class="form-control" name="merchant_profile" value="">
+            </div>
+
+            <div class="col-lg-8 mt-3 mx-auto ">
+                <label for="input"> New Password </label>
+            <input type="text" class="form-control" placeholder="New password" name="merchant_password" value="">
+            </div>
+
+            <div class="col-lg-5 mt-3 mx-auto">
+            <input type="submit" class="btn btn-dark w-100 " name="update_merchant" value="Update Profile"> 
+</div>
+
+        </div>
+
+     </form>
+
+ </div>
   
 
-      <td> 
 
-            <a href="driver_update.php?idd=<?php echo $show['id']; ?>" class="badge-success p-1" data-toggle="tooltip" title="Hooray!"> Edit    </a>
-        <a href="driver_query.php?delete=<?php echo $show['id']; ?>" class="badge-danger p-1" data-toggle="tooltip" title="Hooray!"> Delete    </a>
 
-       </td>
-    
-    </tr>
 
-<?php } ?>
-    
-  </tbody>
-</table>
-    </div>
+
+
+
+
 
 
 
@@ -341,17 +397,6 @@
     <script src="vendors/jqvmap/dist/jquery.vmap.min.js"></script>
     <script src="vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
     <script src="vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
-
-
-
-
-<script>
-$(document).ready(function(){
-  $('[data-toggle="tooltip"]').tooltip();
-});
-</script>
-
-
     <script>
         (function($) {
             "use strict";

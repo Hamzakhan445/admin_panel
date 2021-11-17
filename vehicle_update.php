@@ -93,14 +93,7 @@
                         </ul>
                     </li>
 
-
-                      <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i> Vehicle Pricing </a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-table"></i><a href="add_vpricing.php"> Add pricing  </a></li>
-                            <li><i class="fa fa-table"></i><a href="show_vpricing.php"> Show pricing  </a></li>
-                        </ul>
-                    </li>
+ 
 
                     
                 </ul>
@@ -266,22 +259,23 @@
         ----------------------------------------------------------------------- -->
                         
 
-       	<?php 
 
-       		include 'connection.php';
+        <?php 
 
-       		$id = $_GET['idd'];
+            include 'connection.php';
 
-       		$selectdata = "select * from vehicle_pricing where id = $id ";
+            $id = $_GET['idd'];
 
-       		$runquery = mysqli_query($con, $selectdata);
+            $selectdata = "select * from vehicle_pricing where id = $id ";
 
-       		while ($showdata = mysqli_fetch_array($runquery)) {
-       			 
-       	 	
-       	 	if (isset($_POST['update_vehicle'])) {
+            $runquery = mysqli_query($con, $selectdata);
 
-       	 	$idd = $_GET['idd'];
+             $showdata = mysqli_fetch_array($runquery);
+                 
+            
+            if (isset($_POST['update_vehicle'])) {
+
+            $idd = $_GET['idd'];
 
 
      $merchant_id = $_POST['merchant_id'];
@@ -292,30 +286,29 @@
        
      
 
-     	$updatequery = "update vehicle_pricing set id = $idd, merchant_id = '$merchant_id', vehicle_type = '$vehicle_type', price_perhour = '$price_hr' where id= $idd ";
- 				
- 		$rquery = mysqli_query($con, $updatequery);		
+        $updatequery = "update vehicle_pricing set id = $idd, merchant_id = '$merchant_id', vehicle_type = '$vehicle_type', price_perhour = '$price_hr' where id= $idd ";
+                
+        $rquery = mysqli_query($con, $updatequery);     
 
 
       if ($rquery) {
  
-      	echo "<script> alert('Data Updated'); window.location.href = 'show_vehicle.php';  </script> ";
+        echo "<script> alert('Data Updated'); window.location.href = 'show_vehicle.php';  </script> ";
       }
 
       else
       {
-      	echo "<script> alert('Data not Updated'); </script> ";
+        echo "<script> alert('Data not Updated'); </script> ";
 
       }
 
 
 
-       	 	}
+            }
 
 
-       	 ?>
-   	
-
+         ?>
+    
          <div class="form-merchant bg-white  p-5 shadow  w-75 mx-auto mt-3 ">
              
          <form action="" method="post" enctype="multipart/form-data" >
@@ -328,8 +321,11 @@
              </div>
 
                 <div class="col-lg-5">
-            <label for="input"> vehicle_type </label>
-            <input type="text" value="<?php echo $showdata['vehicle_type'] ?>" required class="form-control " name="vehicle_type" >
+            <label for="input"> Select Type </label>
+             <select name="vehicle_type" class="form-control ">
+                 <option value="1">Car</option>
+                 <option value="2">Motorcycle</option>
+             </select>
              </div>
      
                 <div class="col-lg-10">
@@ -337,7 +333,7 @@
             <input type="text" value="<?php echo $showdata['price_perhour'] ?>" required class="form-control " name="price_hr" >
              </div>
  
-
+ 
           
                  </div>
                
@@ -345,7 +341,6 @@
 
              </form>
 
-                <?php  } ?>
 
 
          </div>

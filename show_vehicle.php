@@ -94,14 +94,7 @@
                         </ul>
                     </li>
 
-
-                      <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i> Vehicle Pricing </a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-table"></i><a href="add_vpricing.php"> Add pricing  </a></li>
-                            <li><i class="fa fa-table"></i><a href="show_vpricing.php"> Show pricing  </a></li>
-                        </ul>
-                    </li>
+ 
 
                     
                 </ul>
@@ -308,14 +301,24 @@
     <tr>
       <th scope="row"> <?php echo $show['id']; ?>  </th>
       <th scope="row"> <?php echo $show['merchant_id']; ?>  </th>
-      <td><?php echo $show['vehicle_type']; ?></td>
+      <td><?php
+
+if ($show['vehicle_type'] == "1") {
+    // code...
+    echo "Car";
+}
+else
+{
+     echo "Motorcycle";
+}
+       ?></td>
         <td> <?php echo $show['price_perhour']; ?></td>
 
 
       <td> 
 
             <a href="vehicle_update.php?idd=<?php echo $show['id']; ?>" class="badge-success p-1" data-toggle="tooltip" title="Hooray!"> Edit    </a>
-        <a href="driver_query.php?delete=<?php echo $show['id']; ?>" class="badge-danger p-1" data-toggle="tooltip" title="Hooray!"> Delete    </a>
+        <a href="vehicle_query.php?delete=<?php echo $show['id']; ?>" class="badge-danger p-1" data-toggle="tooltip" title="Hooray!"> Delete    </a>
 
        </td>
     

@@ -95,13 +95,7 @@
                     </li>
 
 
-                      <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i> Vehicle Pricing </a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-table"></i><a href="add_vpricing.php"> Add pricing  </a></li>
-                            <li><i class="fa fa-table"></i><a href="show_vpricing.php"> Show pricing  </a></li>
-                        </ul>
-                    </li>
+                   
 
                     
                 </ul>
@@ -288,6 +282,8 @@
      <th>M_address</th>
     <th>M_city</th>
     <th>M_company</th>
+        <th>M_ID</th>
+
     <th>M_logo</th>
     <th>M_pic</th>
     <th>Role_id</th>
@@ -316,6 +312,7 @@
        <td><?php echo $show['merchant_address'] ?></td>
       <td><?php echo $show['merchant_city'] ?></td>
       <td><?php echo $show['merchant_company'] ?></td>
+      <td><?php echo $show['merchant_id'] ?></td>
       <td> <img src="<?php echo $show['merchant_logo']; ?>"  style="width: 50px;height: 50px; object-fit: contain;" alt=""> </td>
       <td> <img src="<?php echo $show['merchant_profile']; ?>" style="width: 50px;height: 50px; object-fit: contain;"  alt=""> </td>
       <td><?php echo $show['role_id'] ?></td>

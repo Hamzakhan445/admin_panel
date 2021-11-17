@@ -22,6 +22,7 @@
         $merchant_address = $_POST['merchant_address'];
         $merchant_city = $_POST['merchant_city'];
         $merchant_company = $_POST['merchant_company'];
+        $merchant_id = $_POST['merchant_id'];
  
         // Logo 
         $merchant_logo  = $_FILES['merchant_logo'];
@@ -40,7 +41,7 @@
       $merchant_password = md5($merchant_password);
 
 
-      $insertquery = "insert into merchant_table(merchant_name, merchant_email, merchant_password, merchant_address, merchant_city, merchant_company, merchant_logo, merchant_profile, role_id)values('$merchant_name', '$merchant_email', '$merchant_password',  '$merchant_address', '$merchant_city', '$merchant_company', '$dest1', '$dest2', '2')";
+      $insertquery = "insert into merchant_table(merchant_name, merchant_email, merchant_password, merchant_address, merchant_city, merchant_company, merchant_logo, merchant_profile, merchant_id role_id)values('$merchant_name', '$merchant_email', '$merchant_password',  '$merchant_address', '$merchant_city', '$merchant_company', '$merchant_id', '$dest1', '$dest2', '2')";
 
       $irquery = mysqli_query($con, $insertquery);
 
@@ -172,14 +173,7 @@ else{
                     </li>
 
 
-                      <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i> Vehicle Pricing </a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-table"></i><a href="add_vpricing.php"> Add pricing  </a></li>
-                            <li><i class="fa fa-table"></i><a href="show_vpricing.php"> Show pricing  </a></li>
-                        </ul>
-                    </li>
-
+                     
                     
                 </ul>
             </div><!-- /.navbar-collapse -->

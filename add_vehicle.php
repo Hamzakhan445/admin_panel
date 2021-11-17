@@ -95,13 +95,7 @@
                     </li>
 
 
-                      <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i> Vehicle Pricing </a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-table"></i><a href="add_vpricing.php"> Add pricing  </a></li>
-                            <li><i class="fa fa-table"></i><a href="show_vpricing.php"> Show pricing  </a></li>
-                        </ul>
-                    </li>
+                       
 
                     
                 </ul>
@@ -279,8 +273,11 @@
              </div>
 
                 <div class="col-lg-5">
-            <label for="input"> vehicle_type </label>
-            <input type="text" required class="form-control " name="vehicle_type" >
+                    <label for="input"> Select Type </label>
+             <select name="vehicle_type" class="form-control ">
+                 <option value="1">Car</option>
+                 <option value="2">Motorcycle</option>
+             </select>
              </div>
      
                 <div class="col-lg-10">
